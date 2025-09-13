@@ -61,7 +61,7 @@ const App = () => {
       category: 'EDUCATION',
       type: 'NEED',
       description: 'HIGH SCHOOL STUDENTS NEED ALGEBRA HELP - VOLUNTEERS WANTED',
-      contact: 'CONTACT VIA PLATFORM',
+      contact: '806.747.1212',
       hours: 'EVENINGS PREFERRED',
       coordinates: { lat: 33.5695, lng: -101.8795 },
       status: 'URGENT',
@@ -84,7 +84,13 @@ const App = () => {
   useEffect(() => {
     const savedResources = localStorage.getItem('aidnet-resources');
     if (savedResources) {
-      setResources(JSON.parse(savedResources));
+      try {
+        const parsed = JSON.parse(savedResources);
+        setResources(parsed);
+      } catch (error) {
+        setResources(sampleData);
+        localStorage.setItem('aidnet-resources', JSON.stringify(sampleData));
+      }
     } else {
       setResources(sampleData);
       localStorage.setItem('aidnet-resources', JSON.stringify(sampleData));
@@ -229,16 +235,47 @@ const App = () => {
     : resources.filter(resource => resource.category === activeCategory);
 
   const handleFormSubmit = () => {
-    if (!formData.name || !formData.description || !formData.contact || !formData.coordinates) return;
+    if (!formData.name || formData.name.trim() === '') {
+      alert('Please enter a resource name');
+      return;
+    }
+    
+    if (!formData.description || formData.description.trim() === '') {
+      alert('Please enter a description');
+      return;
+    }
+    
+    if (!formData.contact || formData.contact.trim() === '') {
+      alert('Please enter contact information');
+      return;
+    }
+    
+    if (!formData.coordinates) {
+      alert('Please click on the map to set a location first');
+      return;
+    }
 
     const newResource = {
       id: Date.now(),
-      ...formData,
+      name: formData.name.trim().toUpperCase(),
+      category: formData.category,
+      type: formData.type,
+      description: formData.description.trim().toUpperCase(),
+      contact: formData.contact.trim(),
+      hours: formData.hours.trim() || 'CONTACT FOR HOURS',
+      coordinates: formData.coordinates,
       status: formData.type === 'OFFER' ? 'ACTIVE' : 'NEEDED',
       addedBy: 'COMMUNITY USER'
     };
 
-    setResources([...resources, newResource]);
+    setResources(prevResources => {
+      const updatedResources = [...prevResources, newResource];
+      localStorage.setItem('aidnet-resources', JSON.stringify(updatedResources));
+      return updatedResources;
+    });
+
+    setActiveCategory('ALL');
+    setShowAddForm(false);
     setFormData({
       name: '',
       category: 'FOOD',
@@ -248,7 +285,10 @@ const App = () => {
       hours: '',
       coordinates: null
     });
-    setShowAddForm(false);
+
+    setTimeout(() => {
+      alert('Resource added successfully to the community map!');
+    }, 500);
   };
 
   const handleCloseForm = () => {
@@ -416,18 +456,25 @@ const App = () => {
                 </div>
                 
                 {formData.coordinates && (
-                  <div className="bg-blue-50 p-4 border-2 border-blue-200">
-                    <p className="text-sm font-black tracking-wide text-blue-800">
+                  <div className="bg-green-50 p-4 border-2 border-green-200">
+                    <p className="text-sm font-black tracking-wide text-green-800">
                       LOCATION SET: {formData.coordinates.lat.toFixed(4)}, {formData.coordinates.lng.toFixed(4)}
+                    </p>
+                  </div>
+                )}
+
+                {!formData.coordinates && (
+                  <div className="bg-yellow-50 p-4 border-2 border-yellow-200">
+                    <p className="text-sm font-black tracking-wide text-yellow-800">
+                      CLICK MAP TO SET LOCATION
                     </p>
                   </div>
                 )}
                 
                 <button 
                   onClick={handleFormSubmit}
-                  disabled={!formData.coordinates}
                   className={`w-full py-4 font-black text-lg tracking-wide transition-colors ${
-                    formData.coordinates 
+                    formData.coordinates && formData.name && formData.description && formData.contact
                       ? 'bg-black text-white hover:bg-gray-800' 
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }`}
