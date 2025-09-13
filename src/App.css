@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: white;
+  color: black;
+}
+
+.min-h-screen { min-height: 100vh; }
+.bg-white { background-color: white; }
+.bg-black { background-color: black; }
+.bg-gray-50 { background-color: #f9fafb; }
+.bg-gray-100 { background-color: #f3f4f6; }
+.bg-blue-50 { background-color: #eff6ff; }
+.bg-green-200 { background-color: #bbf7d0; }
+.bg-red-200 { background-color: #fecaca; }
+.bg-gray-200 { background-color: #e5e7eb; }
+.bg-red-600 { background-color: #dc2626; }
+.bg-gray-300 { background-color: #d1d5db; }
+
+.text-white { color: white; }
+.text-black { color: black; }
+.text-gray-400 { color: #9ca3af; }
+.text-gray-500 { color: #6b7280; }
+.text-gray-600 { color: #4b5563; }
+.text-gray-700 { color: #374151; }
+.text-green-800 { color: #166534; }
+.text-red-800 { color: #991b1b; }
+.text-blue-800 { color: #1e40af; }
+
+.border-black { border-color: black; }
+.border-blue-200 { border-color: #bfdbfe; }
+.border-b-4 { border-bottom-width: 4px; }
+.border-r-4 { border-right-width: 4px; }
+.border-4 { border-width: 4px; }
+.border-2 { border-width: 2px; }
+
+.font-black { font-weight: 900; }
+.font-medium { font-weight: 500; }
+
+.text-6xl { font-size: 3.75rem; line-height: 1; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+
+.tracking-tight { letter-spacing: -0.025em; }
+.tracking-wide { letter-spacing: 0.025em; }
+
+.p-2 { padding: 0.5rem; }
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.p-8 { padding: 2rem; }
+.px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+
+.w-4 { width: 1rem; }
+.w-5 { width: 1.25rem; }
+.w-6 { width: 1.5rem; }
+.w-16 { width: 4rem; }
+.w-24 { width: 6rem; }
+.w-full { width: 100%; }
+.h-2 { height: 0.5rem; }
+.h-4 { height: 1rem; }
+.h-full { height: 100%; }
+
+.max-w-full { max-width: 100%; }
+
+.flex { display: flex; }
+.grid { display: grid; }
+.block { display: block; }
+
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.justify-between { justify-content: space-between; }
+.space-x-2 > * + * { margin-left: 0.5rem; }
+.space-y-0 > * + * { margin-top: 0; }
+.space-y-4 > * + * { margin-top: 1rem; }
+
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.gap-4 { gap: 1rem; }
+
+.cursor-pointer { cursor: pointer; }
+.cursor-not-allowed { cursor: not-allowed; }
+
+.transition-colors { 
+  transition-property: color, background-color, border-color; 
+  transition-duration: 150ms; 
+}
+
+.hover\:bg-gray-100:hover { background-color: #f3f4f6; }
+.hover\:bg-gray-200:hover { background-color: #e5e7eb; }
+.hover\:bg-gray-50:hover { background-color: #f9fafb; }
+.hover\:bg-blue-100:hover { background-color: #dbeafe; }
+.hover\:bg-gray-800:hover { background-color: #1f2937; }
+
+.focus\:outline-none:focus { outline: none; }
+
+.animate-pulse { 
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; 
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-2 { 
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
+  }
+  .lg\:h-\[500px\] { 
+    height: 500px; 
+  }
+}
+
+button { 
+  border: none; 
+  background: none; 
+  cursor: pointer; 
+}
+
+input, select, textarea { 
+  font-family: inherit; 
+}
+
+.h-96 { height: 24rem; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.text-center { text-align: center; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.flex-wrap { flex-wrap: wrap; }
+.gap-0 { gap: 0; }
+.border-r-0 { border-right-width: 0; }
